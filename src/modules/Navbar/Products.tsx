@@ -54,7 +54,7 @@ const Products = () => {
           <div className="flex gap-[10px] items-center">
             <EditIcon/>
             <DeleteIcon/>
-          </div>
+          </div> 
         </div>
         <div className="flex rounded-[30px] bg-[#FFFFFF] py-[17px] px-[50px] overflow-auto">
           <div className="w-[14%] flex items-center">
