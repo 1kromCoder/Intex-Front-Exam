@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.ant-menu-item-only-child {
+    color: #B4B4C6 !important;
+    animation: 0 !important;
+    transition: none !important;
+}
+
+.ant-menu-item-selected {
+    background: transparent !important;
+    color: #009398 !important;
+}
