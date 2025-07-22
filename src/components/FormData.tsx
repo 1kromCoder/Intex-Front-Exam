@@ -11,7 +11,7 @@ const customizeRequiredMark = (label: React.ReactNode, { required }: { required:
     {required ? <Tag color="error">Required</Tag> : <Tag color="warning">optional</Tag>}
     {label}
   </>
-);
+);  
 
 const FormData = ({category, categoryData}: {category: string, categoryData: any}) => {
   const [form] = Form.useForm();

@@ -3,8 +3,18 @@ import { Text } from ".."
 import type { ProductType } from "../../types/ProductType"
 import { formatPrice } from "../Formatter"
 import { API } from "../../service/getEnv"
+import { Modal } from "antd"
+import { useContext, useState } from "react"
+import { deleteRequest } from "../../service/getRequest"
+import { Context } from "../../context/Context"
 
 const ProductCard = ({item}: {item: ProductType}) => {
+  const [modal, setModal] = useState<boolean>(false)
+  let {token} = useContext(Context)
+  async function handleDelete(){
+    let deleted = await deleteRequest(`/product/${item.id}`, token=token);
+    return deleted
+  }
   return (
     <div className="flex rounded-[30px] bg-[#FFFFFF] py-[17px] px-[50px] overflow-auto">
           <div className="w-[14%] flex items-center">
@@ -23,8 +33,18 @@ const ProductCard = ({item}: {item: ProductType}) => {
           <div className="w-[12%] flex items-center"><Text classList="!text-black">{item.depth}</Text></div>
           <div className="flex gap-[10px] items-center">
             <div className="cursor-pointer duration-300 hover:scale-[1.1]"><EditIcon/></div>
-            <div className="cursor-pointer duration-300 hover:scale-[1.1]"><DeleteIcon/></div>
+            <div onClick={() => setModal(true)} className="cursor-pointer duration-300 hover:scale-[1.1]"><DeleteIcon/></div>
           </div> 
+          <Modal
+        title="Ishonchinggiz komilmi?"
+        open={modal}
+        okText="O'chirish"
+        cancelText="Bekor qilish"
+        onCancel={() => {
+          setModal(false);
+        }}
+        onOk={handleDelete}
+      />
     </div>
   )
 }

@@ -51,7 +51,7 @@ const CreateProduct = ({
   }, [token])
   return (
     <div className="fixed z-[11] inset-0 backdrop-filter bg-black/40 backdrop-blur-[4px] flex items-center justify-center">
-      <div className="w-[1000px] h-[700px] relative rounded-[20px] bg-[#F8F8F8] flex flex-col items-center justify-center pt-[10px] gap-[10px]">
+      <div className="w-[1000px] h-[90%] relative rounded-[20px] bg-[#F8F8F8] flex flex-col items-center justify-center pt-[10px] gap-[10px]">
         <div className="absolute top-[20px] right-[30px] cursor-pointer">
           <CloseOutlined onClick={() => setCreate(false)} className="!text-[25px] !text-[#B9B9B9]" />
         </div>
