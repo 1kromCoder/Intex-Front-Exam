@@ -11,9 +11,9 @@ export const paths = {
     login: "/login",
     category: "/category",
     products: "/products",
-    zakaz: "/zakaz/",
+    zakaz: "/zakaz",
     site: "/site",
-    notFound: "*"
+    notFound: "/*"
 }
 
 export const NavbarList = [
@@ -56,7 +56,7 @@ export const NavbarNavList = [
     },
     {
         id: 2,
-        label: <NavLink to={paths.zakaz}>Заказы</NavLink>,
+        label: <NavLink to={paths.zakaz}>Заказы</NavLink>
     },
     {
         id: 3,

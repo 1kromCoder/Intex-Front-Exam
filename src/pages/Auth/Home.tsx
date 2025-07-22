@@ -1,12 +1,14 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { paths } from '../../hooks/path'
+import { Context } from '../../context/Context'
 
 const Home = () => {
     const navigate = useNavigate()
+    const {token} = useContext(Context)
     useEffect(() => {
-        navigate(paths.login)
-    }, [])
+        navigate(token ? paths.products : paths.login)
+    }, [token])
 
     return ""
 }

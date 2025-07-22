@@ -1,0 +1,105 @@
+{
+  "Users": [
+    {
+      "id": "1",
+      "username": "Nurali",
+      "password": "1102",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "Azamat",
+      "password": "1111",
+      "role": "admin"
+    },
+    {
+      "id": "3",
+      "username": "Ikromxon",
+      "password": "1111",
+      "role": "admin"
+    }
+  ],
+  "Products": [
+    {
+      "id": "1",
+      "image": "../src/assets/images/basseyn.png",
+      "oldPrice": 1800000,
+      "newPrice": 1520000,
+      "count": 10,
+      "ramka": "Металлический",
+      "razmer": "3.66 x 2.0",
+      "glubina": 76,
+      "category": "Каркасные"
+    },
+    {
+      "id": "2",
+      "image": "../src/assets/images/basseyn2.png",
+      "oldPrice": 1800000,
+      "newPrice": 1520000,
+      "count": 10,
+      "ramka": "Металлический",
+      "razmer": "3.66",
+      "glubina": 76,
+      "category": "Надувные"
+    }
+  ],
+  "Zakaz": [
+    {
+      "id": "1",
+      "clientName": "Nodir",
+      "phone": "99 6071899",
+      "image": "../src/assets/images/basseyn.png",
+      "glubina": "2.7/60",
+      "price": 1520000,
+      "address": "Yunusobod 15 Bog’ishamol ko’chasi  5-uy",
+      "date": "14:32  25.04.22"
+    }
+  ],
+  "Konsultatsiya": [
+    {
+      "id": "1",
+      "clientName": "Abbos",
+      "phone": "99 5121548",
+      "date": "14:32  25.04.22"
+    }
+  ],
+  "Categories": [
+      {
+        "id": "1",
+        "name": "Каркасные",
+        "uzName": "Karkasli"
+      },
+        {
+        "id": "2",
+        "name": "Надувные",
+        "uzName": "Shishiriladigan"
+        }
+  ],
+  "Site": [
+    {
+      "id": "1",
+      "title": "Телефонный номер",
+      "text": "(998) 99 911 02 04"
+    },
+    {
+      "id": "2",
+      "title": "Адрес",
+      "text": "Улица Пахлавона Махмуда, Яшнабадский район, город Ташкент"
+    },
+    {
+      "id": "3",
+      "title": "Рабочее время",
+      "text": "Будние дни: 10:00 - 22:00  Без выходных"
+    },
+    {
+      "id": "4",
+      "title": "Телеграм",
+      "text": "https://www.instagram.com/intex-market_uz/"
+    },
+    {
+      "id": "5",
+      "title": "Инстаграм",
+      "text": "https://www.telegram.com/intex-market_uz/"
+    }
+  ]
+}

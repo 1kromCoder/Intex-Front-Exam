@@ -10,3 +10,23 @@
     background: transparent !important;
     color: #009398 !important;
 }
+.ant-form-item-required {
+    color: #898989 !important
+}
+
+.ant-form-item-required::before {
+    font-size: 0px !important;
+}
+
+:where(.css-dev-only-do-not-override-16dneet).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border-radius: 0px !important;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-bottom: 1px solid #504f4f;
+}
+
+.category .ant-form-item-required-mark-optional,
+.ant-form-item-required {
+    font-size: 20px !important;
+}

@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 
 const Text = ({children, classList}:{children:ReactNode, classList?:string}) => {
   return (
-   <p className={`text-[#CCCCCC] text-[20px] font-normal ${classList}`}>{children}</p>
+   <p className={` text-[20px] font-normal ${location.pathname.includes("zakaz") ? "text-black" : "text-[#CCCCCC]"} ${classList}`}>{children}</p>
   )
 }
 
