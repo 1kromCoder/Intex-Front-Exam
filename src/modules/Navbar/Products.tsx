@@ -54,7 +54,7 @@ const Products = () => {
       </div>
       <div>
         <PageCaption active={active} setActive={setActive} pages={pageDatas} />
-      </div>
+      </div>  
       <div className="space-y-[20px]">
         <div className="flex rounded-[30px] bg-[#FFFFFF] py-[17px] px-[50px]">
         <Text classList="w-[18%] !text-black">Изображение</Text>
