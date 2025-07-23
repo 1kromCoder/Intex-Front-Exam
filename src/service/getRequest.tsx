@@ -37,8 +37,8 @@ export const loginRequest = async (
 
 export const postRequest = async (
   url: string,
-  params?: Record<string, string>,
-  token?: string | null
+  body?: any,
+  token?: string | null,
 ) => {
   const res = await fetch(`${API}${url}`, {
     method: "POST",
@@ -46,7 +46,7 @@ export const postRequest = async (
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     },
-    body: JSON.stringify(params),
+    body: JSON.stringify(body),
   });
   const data = await res.json();
   return data;

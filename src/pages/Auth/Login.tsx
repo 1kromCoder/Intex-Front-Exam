@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import loading from "../../assets/images/Loading.png";
 import { paths } from "../../hooks/path";
-import { getRequest, loginRequest } from "../../service/getRequest";
+import { loginRequest } from "../../service/getRequest";
 import { Button, Heading, Text } from "../../components";
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
 
       console.log(users);
       
-      if (users) {
+      if (users.accessToken) {
         setToken(users.accessToken);
         setIsLoggedIn(true);
         location.pathname=paths.products

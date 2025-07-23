@@ -11,7 +11,7 @@ export interface ProductType {
       depth: number,
       status: string,
       tools_ru: string[],
-      tools_uz: string,
+      tools_uz: string[],
       createdAt: string,
       updatedAt:string
       category: {

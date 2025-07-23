@@ -23,7 +23,7 @@ const Zakaz = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: () => getRequest("/order", token),
-    refetchInterval: 10000,
+    refetchInterval: 5000,
   });
 
   const {
@@ -33,7 +33,7 @@ const Zakaz = () => {
   } = useQuery({
     queryKey: ["consultations"],
     queryFn: () => getRequest("/consultation", token),
-    refetchInterval: 10000,
+    refetchInterval: 5000,
   });
 
   if (zakazError) toast.error((zakazErrorObj as Error).message);

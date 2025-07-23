@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { SearchIcon } from "../../assets/icon";
 import { Button, PageCaption, ProductCard, Text } from "../../components";
 import { getRequest } from "../../service/getRequest";
@@ -11,35 +12,47 @@ const Products = () => {
   const { token } = useContext(Context);
   const [active, setActive] = useState<string>("Каркасные");
   const [create, setCreate] = useState<boolean>(false);
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [pageDatas, setPageData] = useState<{ id: string; title: string }[]>([]);
+  const [search, setSearch] = useState<string>("");
 
-  useEffect(() => {
-    async function getData() {
+  const {
+    data: categoriesData,
+    isError: categoriesError,
+    error: categoriesErrorObj,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => getRequest("/category", token),
+    refetchInterval: 7000,
+  });
 
-      try {
-        let categories = await getRequest("/category");
-        setPageData(categories.data.map((item: any) => {
-          return { id: item.id, title: item.name_ru };
-        }));
-        const data = await getRequest("/product");
-        setProducts(data.data);
-        console.log("d");
-        
-      } catch (err:any) {
-        toast.error(err?.message || "An error occurred");
-      }
-    }
-    getData();
-  }, [token]);
-  
-  const filteredProducts = products.filter((product) => product.category.name_ru === active);
+  const {
+    data: productsData,
+    isError: productsError,
+    error: productsErrorObj,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getRequest("/product", token),
+    refetchInterval: 5000,
+  });
+
+  if (categoriesError) toast.error((categoriesErrorObj as Error).message);
+  if (productsError) toast.error((productsErrorObj as Error).message);
+
+  const pageDatas = categoriesData?.data.map((item: any) => ({
+    id: item.id,
+    title: item.name_ru,
+  })) || [];
+
+  const products: ProductType[] = productsData?.data || [];
+
+  const filteredProducts = products.filter((product) => product.category.name_ru === active && product.frame_ru.toLowerCase().includes(search.toLowerCase()));
+
+  console.log(filteredProducts);
   
   return (
     <div className="py-[22px] px-[42px] space-y-[40px]">
       <div className="flex justify-between">
         <div className="bg-[#fff] w-[370px] h-[64px] rounded-[30px] flex items-center justify-between px-[24px]">
-          <input placeholder="Найти" className="outline-none text-[20px]" />
+          <input onChange={(e) => setSearch(e.target.value)} placeholder="Найти" className="outline-none text-[20px]" />
           <Text classList="!text-[30px]">|</Text>
           <button className="cursor-pointer">
             <SearchIcon />
@@ -57,19 +70,22 @@ const Products = () => {
       </div>  
       <div className="space-y-[20px]">
         <div className="flex rounded-[30px] bg-[#FFFFFF] py-[17px] px-[50px]">
-        <Text classList="w-[18%] !text-black">Изображение</Text>
-        <Text classList="w-[17%] !text-black">Цена(сум)</Text>
-        <Text classList="w-[15%] !text-black">Количество</Text>
-        <Text classList="w-[23%] pl-[2%] !text-black">Рамка</Text>
-        <Text classList="w-[15%] pr-[2%] !text-black">Размер(м)</Text>
-        <Text classList="w-[15%] !text-black">Глубина(см)</Text>
-        <Text classList="w-[15%] !text-black">Действия</Text>
-      </div>
+          <Text classList="w-[18%] !text-black">Изображение</Text>
+          <Text classList="w-[17%] !text-black">Цена(сум)</Text>
+          <Text classList="w-[15%] !text-black">Количество</Text>
+          <Text classList="w-[23%] pl-[2%] !text-black">Рамка</Text>
+          <Text classList="w-[15%] pr-[2%] !text-black">Размер(м)</Text>
+          <Text classList="w-[15%] !text-black">Глубина(см)</Text>
+          <Text classList="w-[15%] !text-black">Действия</Text>
+        </div>
+        
+      <div className="space-y-[20px] max-h-[calc(99vh-400px)] no-scrollbar overflow-y-auto pr-2">
         {filteredProducts.map((product) => (
-            <ProductCard key={product.id} item={product} />
-          ))}
+          <ProductCard key={product.id} item={product} />
+        ))}
       </div>
-      {create && <CreateProduct categories={pageDatas}  setCreate={setCreate} category={active} />}
+      </div>
+      {create && <CreateProduct setCreate={setCreate} category={active} />}
     </div>
   );
 };
