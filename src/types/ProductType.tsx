@@ -19,4 +19,4 @@ export interface ProductType {
         name_ru: string,
         name_uz: string
       }
-    }
+  }

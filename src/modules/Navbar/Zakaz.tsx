@@ -15,7 +15,7 @@ import { useContext } from "react";
 const Zakaz = () => {
   const [active, setActive] = useState("Заказы");
   const { token } = useContext(Context);
-
+  const [search, setSearch] = useState<string>("");
   const {
     data: zakazData,
     isError: zakazError,
@@ -41,17 +41,18 @@ const Zakaz = () => {
 
   const zakaz: ZakazType[] = zakazData?.data || [];
   const konsult: ConsultType[] = konsultData?.data || [];
-
+  const filteredZakaz = zakaz.filter((item: ZakazType) => item.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredKonsult = konsult.filter((item: ConsultType) => item.name.toLowerCase().includes(search.toLowerCase()));
   const pages = [
     { id: "1", title: "Заказы" },
     { id: "2", title: "Консультации" },
   ];
 
   return (
-    <div className="py-[22px] px-[42px] space-y-[40px]">
+    <div className="py-[22px] px-[42px] space-y-[40px] ">
       <div className="flex justify-between">
         <div className="bg-[#fff] w-[370px] h-[64px] rounded-[30px] flex items-center justify-between px-[24px]">
-          <input placeholder="Найти" className="outline-none text-[20px]" />
+          <input onChange={(e) => setSearch(e.target.value)} placeholder="Найти" className="outline-none text-[20px]" />
           <Text classList="!text-[30px] !text-[#CCCCCC]">|</Text>
           <button className="cursor-pointer">
             <SearchIcon />
@@ -77,9 +78,11 @@ const Zakaz = () => {
               <Text classList="!w-[15%]">Время</Text>
               <Text classList="!w-[15%]">Действия</Text>
             </div>
-            {zakaz.map((item: ZakazType) => (
-              <ZakazCard key={item.id} item={item} />
-            ))}
+            <div className="space-y-[20px] max-h-[calc(99vh-400px)] no-scrollbar overflow-y-auto pr-2">
+              {filteredZakaz.map((item: ZakazType) => (
+                <ZakazCard key={item.id} item={item} />
+              ))}
+            </div>
           </>
         )}
 
@@ -91,7 +94,7 @@ const Zakaz = () => {
               <Text classList="!w-[29%]">Время</Text>
               <Text classList="!w-[1%]">Действия</Text>
             </div>
-            {konsult.map((item: ConsultType) => (
+            {filteredKonsult.map((item: ConsultType) => (
               <KonsultCard key={item.id} item={item} />
             ))}
           </>

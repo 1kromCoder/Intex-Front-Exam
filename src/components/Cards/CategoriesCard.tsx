@@ -13,6 +13,7 @@ const CategoriesCard = ({item}: {item: CategoryType}) => {
   let {token} = useContext(Context)
   const handleDelete = async() => {
     let deleted = await deleteRequest(`/category/${item.id}`, token=token);
+    window.location.reload()
     return deleted
   }
   return (

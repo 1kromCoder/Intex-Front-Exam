@@ -21,7 +21,7 @@ const Products = () => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getRequest("/category", token),
-    refetchInterval: 7000,
+    refetchInterval: 3000,
   });
 
   const {
@@ -31,7 +31,7 @@ const Products = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: () => getRequest("/product", token),
-    refetchInterval: 5000,
+    refetchInterval: 1000,
   });
 
   if (categoriesError) toast.error((categoriesErrorObj as Error).message);

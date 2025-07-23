@@ -110,7 +110,7 @@ const CreateProduct = ({
   )}
 </label>
         <div>
-          <FormDatas file={file} toolRu={toolsRu} toolUz={toolsUz} categoryData={categories} category={category} />
+          <FormDatas file={file} setCreate={setCreate} toolRu={toolsRu} toolUz={toolsUz} categoryData={categories} category={category} />
         </div>
       </div>
     </div>

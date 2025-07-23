@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Form, Input, Tag } from 'antd';
-import { CategoryIcon, CountIcon, PriceIcon, RamkaIcon, RazmerIcon, StatusIcon } from '../assets/icon';
+import { CountIcon, PriceIcon, RamkaIcon, RazmerIcon, StatusIcon } from '../assets/icon';
 import CustomSelect from './CustomSelect';
 import Button from './Button';
 import ArraySelect from './CustomArraySelect';
@@ -19,7 +19,7 @@ const customizeRequiredMark = (label: React.ReactNode, { required }: { required:
   </>
 );
 
-const FormDatas = ({ category, categoryData, toolRu, toolUz, file }: {file:File | null, toolRu: any[], toolUz: any[], category: string, categoryData: any }) => {
+const FormDatas = ({ category, categoryData, toolRu, toolUz, file, setCreate }: {setCreate?: React.Dispatch<React.SetStateAction<boolean>>, file:File | null, toolRu: any[], toolUz: any[], category: string, categoryData: any }) => {
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState<RequiredMark>('optional');
   const {toolsRU, toolsUz, token} = useContext(Context)
@@ -62,6 +62,8 @@ const filename = await axios.post(`${API}/file`, formData, {
       console.log('Payload:', payload);
       await postRequest('/product', payload, token);
       toast.success('Product created successfully!');
+      // @ts-ignore
+      setCreate(false);
       form.resetFields();
     } catch (err: any) {
       toast.error(err?.message || 'An error occurred');

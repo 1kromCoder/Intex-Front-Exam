@@ -145,9 +145,10 @@ const EditProduct = ({
             </div>
           )}
         </label>
-        
+
         <div>
           <EditForm 
+          setCreate={setCreate}
             image={image} 
             editData={editData} 
             file={file} 

@@ -4,7 +4,6 @@ import { CategoryIcon, CountIcon, PriceIcon, RamkaIcon, RazmerIcon, StatusIcon }
 import CustomSelect from './CustomSelect';
 import Button from './Button';
 import ArraySelect from './CustomArraySelect';
-import { postRequest } from "../service/getRequest";
 import toast from 'react-hot-toast';
 import { Context } from '../context/Context';
 import axios from 'axios';
@@ -20,12 +19,12 @@ const customizeRequiredMark = (label: React.ReactNode, { required }: { required:
   </>
 );
 
-const EditForm = ({ category, categoryData, toolRu, toolUz, file, editData, image }: {image?: string | null, editData?: ProductType, file:File | null, toolRu: any[], toolUz: any[], category: string, categoryData: any }) => {
+const EditForm = ({ category, categoryData, toolRu, toolUz, file, editData, image, setCreate }: {setCreate?: React.Dispatch<React.SetStateAction<boolean>>, image?: string | null, editData?: ProductType, file:File | null, toolRu: any[], toolUz: any[], category: string, categoryData: any }) => {
   console.log("image", image);
   
   const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState<RequiredMark>('optional');
-  const {toolsRU, toolsUz, token} = useContext(Context)
+  const {token} = useContext(Context)
   const onRequiredTypeChange = ({ requiredMarkValue }: { requiredMarkValue: RequiredMark }) => {
     setRequiredMarkType(requiredMarkValue);
   };
@@ -42,9 +41,11 @@ async function handleSubmit(values: any) {
       });
       imageName = filename.data.filename;
     }
+    
+    if(!image) return
 
     const payload = {
-      image: editData?.image || imageName,
+      image: image?.length > 20 ? imageName : editData?.image,
       categoryId: editData?.categoryId || values.cateogry,
       price: Number(values["Стартовая цена (сум)"]),
       count: Number(values["Количество"]),
@@ -66,12 +67,9 @@ async function handleSubmit(values: any) {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Product updated successfully!");
-    } else {
-      // POST if creating
-      await postRequest("/product", payload, token);
-      toast.success("Product created successfully!");
+      // @ts-ignore
+      setCreate(false)
     }
-
     form.resetFields();
   } catch (err: any) {
     toast.error(err?.message || "An error occurred");

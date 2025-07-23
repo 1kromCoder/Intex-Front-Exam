@@ -7,7 +7,6 @@ import { Modal } from "antd"
 import { useContext, useState } from "react"
 import { deleteRequest } from "../../service/getRequest"
 import { Context } from "../../context/Context"
-import CreateProduct from "../CreateProduct"
 import EditProduct from "../EditProduct"
 
 const ProductCard = ({item}: {item: ProductType}) => {
