@@ -23,7 +23,7 @@ const Zakaz = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: () => getRequest("/order", token),
-    refetchInterval: 5000,
+    refetchInterval: 3000,
   });
 
   const {

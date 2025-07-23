@@ -9,7 +9,8 @@ export interface ZakazType {
     productId: string,
     createdAt: string,
     updatedAt: string,
-    product: ProductType
+    product: ProductType,
+    check: boolean
 }
 
 export interface OrderType {

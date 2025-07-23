@@ -2,7 +2,7 @@ import type { ZakazType } from '../../types/ZakazType'
 import { formatPrice, Text } from '..'
 import { DeleteIcon, OKIcon } from '../../assets/icon'
 import { API } from '../../service/getEnv'
-import { deleteRequest } from '../../service/getRequest'
+import { deleteRequest, patchRequest } from '../../service/getRequest'
 import { Context } from '../../context/Context'
 import { useContext, useState } from 'react'
 import { Modal } from 'antd'
@@ -15,6 +15,10 @@ const ZakazCard = ({item}: {item: ZakazType}) => {
       return deleted
   }
   
+  const handleCheck = async () => {
+    let check = await patchRequest(`/order/${item.id}`, {check: !item.check}, token=token);
+    return check
+  }
   return (
     <div className="flex rounded-[30px] bg-[#FFFFFF] items-center justify-center py-[10px] px-[30px] overflow-auto">
         <Text classList='!w-[22%]'>{item.name}</Text>
@@ -27,10 +31,9 @@ const ZakazCard = ({item}: {item: ZakazType}) => {
           <Text classList="!w-[17%] !text-[14px]">{item.address}</Text>
           <Text classList="!w-[20%]">{item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0].split(":")[0]}:{item.createdAt.split("T")[1].split(".")[0].split(":")[1]}</Text> 
           <div className="flex w-[15%] pl-[1%] gap-[10px] items-center">
-            <div className="cursor-pointer duration-300 hover:scale-[1.1]"><OKIcon/></div>
+            <div onClick={handleCheck} className={`cursor-pointer duration-300 ${item.check ? "text-green-500" : "text-gray-500"} hover:scale-[1.1]`}><OKIcon/></div>
             <div onClick={() => setModal(true)} className="cursor-pointer duration-300 hover:scale-[1.1]"><DeleteIcon/></div>
           </div> 
-           
         <Modal
         title="Ishonchinggiz komilmi?"
         open={modal}
