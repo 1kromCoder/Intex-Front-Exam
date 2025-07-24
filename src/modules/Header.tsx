@@ -21,7 +21,7 @@ const Header = () => {
       <div className="py-[20.5px] px-[40px] flex justify-between border-b-[3px] bg-[#f4f4f1] border-b-[#EBEBFF]">
         <div></div>
         <div className="flex gap-[20px] items-center relative">
-          <a href="http://50.19.171.38/" target="_blank">
+          <a href="http://localhost:3000" target="_blank">
             <Text classList="!text-[#A6A6A6] cursor-pointer hover:underline">Просмотр веб-сайта</Text>
           </a>
           <Text>|</Text>
